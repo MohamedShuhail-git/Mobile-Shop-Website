@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuhail's Premium Tech Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern Color Palette */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        nav a i {
+            font-size: 1rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .category-btn {
+            background-color: white;
+            border: 1px solid var(--gray);
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            background-color: #f8fafc;
+            padding: 1rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-specs {
+            font-size: 0.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .product-specs span {
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .wishlist-btn {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid var(--gray);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-btn:hover {
+            background-color: #fecaca;
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--gray);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background-color: #f1f5f9;
+            border: none;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background-color: white;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+        }
+
+        .cart-summary {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-btn:hover {
+            background-color: #0d9488;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--danger);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Store Info */
+        .store-info {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .store-info h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Receipt Modal */
+        .receipt-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .receipt-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .receipt-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .receipt-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .receipt-header h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .receipt-body {
+            padding: 1.5rem;
+        }
+
+        .receipt-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .receipt-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .receipt-totals {
+            border-top: 1px dashed #ddd;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .receipt-grand-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 1rem;
+        }
+
+        .receipt-footer {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .receipt-footer p {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        .close-receipt {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo i {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.7rem;
+            color: var(--gray);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #334155;
+            color: var(--gray);
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" data-page="home">
+                <img src="C:\Users\ASUS\PSD Files\Images\professional-skills-icon.webp" alt="Store Logo">
+                <span>Shuhail's Tech</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li>
+                        <div class="cart-icon light" id="cart-toggle">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Premium Technology at Your Fingertips</h1>
+                <p>Discover the latest gadgets and electronics with unbeatable prices and exceptional service</p>
+                <a href="#" class="btn" data-page="mobiles">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </section>
+
+            <div class="category-nav">
+                <button class="category-btn active" data-category="featured">Featured</button>
+                <button class="category-btn" data-category="mobiles">Mobiles</button>
+                <button class="category-btn" data-category="laptops">Laptops</button>
+                <button class="category-btn" data-category="computers">Computers</button>
+                <button class="category-btn" data-category="tv">TVs</button>
+                <button class="category-btn" data-category="cameras">Cameras</button>
+                <button class="category-btn" data-category="accessories">Accessories</button>
+                <button class="category-btn" data-category="watches">Watches</button>
+            </div>
+
+            <div class="products-grid" id="featured-products">
+                <!-- Featured products will be added by JavaScript -->
+            </div>
+
+            <div class="store-info">
+                <h2><i class="fas fa-store"></i> About Us</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Our Location</h3>
+                            <p>200/10, Gampola Kandy, Sri Lanka</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Contact Us</h3>
+                            <p>+94 76 291 6747</p>
+                            <p>info@shuhailtech.com</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Opening Hours</h3>
+                            <p>Monday - Saturday: 9:00 AM - 5:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobiles Page -->
+        <div id="mobiles" class="page">
+            <h1 class="page-title">Premium Smartphones</h1>
+            <div class="products-grid" id="mobile-products">
+                <!-- Mobile products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Laptops Page -->
+        <div id="laptops" class="page">
+            <h1 class="page-title">Laptops & Notebooks</h1>
+            <div class="products-grid" id="laptop-products">
+                <!-- Laptop products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Computers Page -->
+        <div id="computers" class="page">
+            <h1 class="page-title">Desktop Computers</h1>
+            <div class="products-grid" id="computer-products">
+                <!-- Computer products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- TVs Page -->
+        <div id="tv" class="page">
+            <h1 class="page-title">Televisions</h1>
+            <div class="products-grid" id="tv-products">
+                <!-- TV products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Cameras Page -->
+        <div id="cameras" class="page">
+            <h1 class="page-title">Cameras</h1>
+            <div class="products-grid" id="camera-products">
+                <!-- Camera products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Accessories Page -->
+        <div id="accessories" class="page">
+            <h1 class="page-title">Accessories</h1>
+            <div class="products-grid" id="accessory-products">
+                <!-- Accessory products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Watches Page -->
+        <div id="watches" class="page">
+            <h1 class="page-title">Smart Watches</h1>
+            <div class="products-grid" id="watch-products">
+                <!-- Watch products will be added by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1 class="page-title">Contact Us</h1>
+            <div class="store-info">
+                <div class="info-grid">
+                    <div>
+                        <h2><i class="fas fa-envelope"></i> Send Us a Message</h2>
+                        <form class="contact-form">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                            <input type="email" id="email" placeholder="Your Email" required>
+                            <input type="text" id="subject" placeholder="Subject">
+                            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                            <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                        </form>
+                    </div>
+                    <div>
+                        <h2><i class="fas fa-info-circle"></i> Store Information</h2>
+                        <div class="footer-contact">
+                            <p><i class="fas fa-map-marker-alt"></i> 200/10, Gampola Kandy, Sri Lanka</p>
+                            <p><i class="fas fa-phone-alt"></i> +94 762916747</p>
+                            <p><i class="fas fa-envelope"></i> info@shuhailtech.com</p>
+                            <p><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</p>
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <h3><i class="fas fa-share-alt"></i> Follow Us</h3>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added by JavaScript -->
+            <p style="text-align: center; margin-top: 2rem;">Your cart is empty</p>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">Rs. 0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkout">
+                <i class="fas fa-credit-card"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="receipt-modal" id="receipt-modal">
+        <div class="receipt-container">
+            <div class="receipt-header">
+                <h2>SHUHAIL'S TECH STORE</h2>
+                <p>200/10, Gampola Kandy, Sri Lanka</p>
+                <p>+94 762916747 | info@shuhailtech.com</p>
+            </div>
+            <div class="receipt-body">
+                <div class="receipt-info">
+                    <div>
+                        <p><strong>Order #:</strong> <span id="receipt-order-number">000000</span></p>
+                        <p><strong>Date:</strong> <span id="receipt-date">00/00/0000</span></p>
+                    </div>
+                    <div>
+                        <p><strong>Customer:</strong> Guest</p>
+                        <p><strong>Items:</strong> <span id="receipt-item-count">0</span></p>
+                    </div>
+                </div>
+                <div class="receipt-items" id="receipt-items-list">
+                    <!-- Receipt items will be added here -->
+                </div>
+                <div class="receipt-totals">
+                    <div class="receipt-total">
+                        <span>Subtotal:</span>
+                        <span id="receipt-subtotal">Rs. 0.00</span>
+                    </div>
+                    <div class="receipt-total">
+                        <span>Tax (05%):</span>
+                        <span id="receipt-tax">Rs. 0.00</span>
+                    </div>
+                    <div class="receipt-grand-total">
+                        <span>Total:</span>
+                        <span id="receipt-grand-total">Rs. 0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="receipt-footer">
+                <p>Thank you for your purchase!</p>
+                <p>Your items will be ready for pickup within 24 hours</p>
+                <p>Please bring this receipt when collecting your items</p>
+                <button class="close-receipt" id="close-receipt">Close Receipt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Shuhail's Tech</span>
+                </div>
+                <p>Your premier destination for the latest technology and electronics in Sri Lanka.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#" data-page="mobiles">Mobiles</a></li>
+                    <li><a href="#" data-page="laptops">Laptops</a></li>
+                    <li><a href="#" data-page="computers">Computers</a></li>
+                    <li><a href="#" data-page="tv">Televisions</a></li>
+                    <li><a href="#" data-page="cameras">Cameras</a></li>
+                    <li><a href="#" data-page="accessories">Accessories</a></li>
+                    <li><a href="#" data-page="watches">Watches</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="contact">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 200/10, Gampola Kandy, Sri Lanka</p>
+                <p><i class="fas fa-phone-alt"></i> +94 762916747</p>
+                <p><i class="fas fa-envelope"></i> info@shuhailtech.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Shuhail's Tech Store. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript Code
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product data for all categories with images
+            const products = {
+                featured: [
+                    {
+                        id: 101,
+                        name: "iPhone 15 Pro",
+                        description: "Latest iPhone with A17 Pro chip and titanium design",
+                        specs: "6.1\" Super Retina XDR, 128GB, 48MP camera",
+                        price: 350000,
+                        image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096",
+                        category: "mobiles",
+                        badge: "New"
+                    },
+                    {
+                        id: 201,
+                        name: "MacBook Pro 14\" M3",
+                        description: "Professional laptop with Apple Silicon",
+                        specs: "M3 chip, 16GB RAM, 512GB SSD, 14.2\" Liquid Retina XDR",
+                        price: 550000,
+                        image: "https://www.apple.com/v/macbook-pro-14-and-16/b/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg",
+                        category: "laptops",
+                        badge: "Bestseller"
+                    },
+                    {
+                        id: 301,
+                        name: "Samsung QN90B Neo QLED",
+                        description: "4K Smart TV with Quantum Matrix Technology",
+                        specs: "65\", Quantum HDR 32x, Object Tracking Sound",
+                        price: 600000,
+                        image: "https://images.samsung.com/is/image/samsung/p6pim/in/qn65qn90batxxl/gallery/in-neo-qled-qn90b-qn65qn90batxxl-532970577?$1300_1038_PNG$",
+                        category: "tv",
+                        badge: "Popular"
+                    },
+                    {
+                        id: 401,
+                        name: "Canon EOS R5",
+                        description: "Professional mirrorless camera",
+                        specs: "45MP, 8K video, 5-axis stabilization",
+                        price: 850000,
+                        image: "https://www.canon.co.uk/media/eos-r5-mkii-rf24-105mm-f4l-is-usm-tiled-product-image-1-1000x1000px_tcm14-2239917.jpg",
+                        category: "cameras",
+                        badge: "Pro"
+                    }
+                ],
+                mobiles: [
+                    {
+                        id: 101,
+                        name: "iPhone 15 Pro",
+                        description: "Latest iPhone with A17 Pro chip and titanium design",
+                        specs: "6.1\" Super Retina XDR, 128GB, 48MP camera",
+                        price: 350000,
+                        image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096",
+                        badge: "New"
+                    },
+                    {
+                        id: 102,
+                        name: "Samsung Galaxy S23 Ultra",
+                        description: "Premium Android phone with S Pen and 200MP camera",
+                        specs: "6.8\" Dynamic AMOLED, 256GB, 5000mAh battery",
+                        price: 320000,
+                        image: "https://images.samsung.com/is/image/samsung/p6pim/in/2302/gallery/in-galaxy-s23-ultra-sm-s918-413360-sm-s918bzkgins-thumb-534606516?$216_216_PNG$",
+                        badge: "Bestseller"
+                    },
+                    {
+                        id: 103,
+                        name: "Google Pixel 8 Pro",
+                        description: "Pure Android experience with best-in-class camera",
+                        specs: "6.7\" OLED, 128GB, Tensor G3 chip",
+                        price: 280000,
+                        image: "https://m.media-amazon.com/images/I/71EE9VYvVQL._AC_UF1000,1000_QL80_.jpg",
+                        badge: "Editor's Choice"
+                    },
+                    {
+                        id: 104,
+                        name: "OnePlus 11 5G",
+                        description: "Flagship killer with Hasselblad camera",
+                        specs: "6.7\" Fluid AMOLED, 256GB, 100W fast charging",
+                        price: 250000,
+                        image: "https://m.media-amazon.com/images/I/61amb0CfMGL._AC_UF1000,1000_QL80_.jpg",
+                        badge: "Value"
+                    },
+                    {
+                        id: 105,
+                        name: "Xiaomi 13 Pro",
+                        description: "Premium Android with Leica camera system",
+                        specs: "6.73\" AMOLED, 256GB, 120W HyperCharge",
+                        price: 240000,
+                        image: "https://i01.appmifile.com/webfile/globalimg/products/pc/xiaomi-13-pro/specs-header.png",
+                        badge: "New"
+                    },
+                    {
+                        id: 106,
+                        name: "Vivo X90 Pro",
+                        description: "Professional photography smartphone",
+                        specs: "6.78\" AMOLED, 256GB, ZEISS optics",
+                        price: 260000,
+                        image: "https://www.vivo.com/content/dam/vivo/in/vivosite-new/x90-series/x90-pro/product-specs/x90-pro-product-specs.png",
+                        badge: "Camera King"
+                    }
+                ],
+                laptops: [
+                    {
+                        id: 201,
+                        name: "MacBook Pro 14\" M3",
+                        description: "Professional laptop with Apple Silicon",
+                        specs: "M3 chip, 16GB RAM, 512GB SSD, 14.2\" Liquid Retina XDR",
+                        price: 550000,
+                        image: "https://www.apple.com/v/macbook-pro-14-and-16/b/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg",
+                        badge: "Pro"
+                    },
+                    {
+                        id: 202,
+                        name: "Dell XPS 15",
+                        description: "Premium Windows laptop with stunning display",
+                        specs: "Intel i7, 16GB RAM, 1TB SSD, 15.6\" 4K OLED",
+                        price: 450000,
+                        image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9520/media-gallery/notebook-xps-9520-t-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=536&qlt=100,0&resMode=sharp2&size=536,402",
+                        badge: "Editor's Choice"
+                    },
+                    {
+                        id: 203,
+                        name: "HP Spectre x360",
+                        description: "Convertible laptop with premium design",
+                        specs: "Intel i7, 16GB RAM, 1TB SSD, 13.5\" 3K2K OLED",
+                        price: 420000,
+                        image: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c07962448.png",
+                        badge: "Versatile"
+                    },
+                    {
+                        id: 204,
+                        name: "Asus ROG Zephyrus G14",
+                        description: "Powerful gaming laptop in compact form",
+                        specs: "Ryzen 9, RTX 4060, 16GB RAM, 1TB SSD, 14\" QHD+",
+                        price: 480000,
+                        image: "https://dlcdnwebimgs.asus.com/gain/4E8B2D5B-9F6B-4D7D-9F0F-6B3B3F6B3F6B/w717/h525",
+                        badge: "Gaming"
+                    }
+                ],
+                computers: [
+                    {
+                        id: 301,
+                        name: "Apple iMac 24\"",
+                        description: "All-in-one desktop with stunning display",
+                        specs: "M1 chip, 8GB RAM, 256GB SSD, 24\" 4.5K Retina",
+                        price: 520000,
+                        image: "https://www.apple.com/v/imac-24/k/images/overview/hero/hero__ecv967jz1y82_large.jpg",
+                        badge: "Sleek"
+                    },
+                    {
+                        id: 302,
+                        name: "Dell XPS Desktop",
+                        description: "Powerful desktop for creators",
+                        specs: "Intel i7, 16GB RAM, 1TB SSD, RTX 3060",
+                        price: 580000,
+                        image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/xps-desktops/xps-8940/media-gallery/desktop-xps-8940-t-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=536&qlt=100,0&resMode=sharp2&size=536,402",
+                        badge: "Powerhouse"
+                    },
+                    {
+                        id: 303,
+                        name: "HP Envy Desktop",
+                        description: "Elegant and powerful desktop PC",
+                        specs: "Intel i5, 12GB RAM, 512GB SSD, GTX 1650",
+                        price: 380000,
+                        image: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c07962448.png",
+                        badge: "Value"
+                    },
+                    {
+                        id: 304,
+                        name: "Lenovo Legion Tower 5",
+                        description: "Gaming desktop with powerful specs",
+                        specs: "Ryzen 7, RTX 3070, 16GB RAM, 1TB SSD",
+                        price: 620000,
+                        image: "https://p1-ofp.static.pub/fes/cms/2022/05/09/3h2e1n7k3b9x2b1u3q4y5g9x5v5k5x5.jpg",
+                        badge: "Gaming"
+                    }
+                ],
+                tv: [
+                    {
+                        id: 401,
+                        name: "Samsung QN90B Neo QLED",
+                        description: "4K Smart TV with Quantum Matrix Technology",
+                        specs: "65\", Quantum HDR 32x, Object Tracking Sound",
+                        price: 600000,
+                        image: "https://images.samsung.com/is/image/samsung/p6pim/in/qn65qn90batxxl/gallery/in-neo-qled-qn90b-qn65qn90batxxl-532970577?$1300_1038_PNG$",
+                        badge: "Premium"
+                    },
+                    {
+                        id: 402,
+                        name: "LG C2 OLED",
+                        description: "Incredible OLED TV with perfect blacks",
+                        specs: "55\", 4K, 120Hz, Dolby Vision IQ",
+                        price: 550000,
+                        image: "https://www.lg.com/in/images/tvs/md07518696/gallery/OLED55C2PSA-D-01-v1.jpg",
+                        badge: "Best Picture"
+                    },
+                    {
+                        id: 403,
+                        name: "Sony Bravia XR A80K",
+                        description: "OLED TV with Cognitive Processor XR",
+                        specs: "55\", 4K, 120Hz, Acoustic Surface Audio+",
+                        price: 580000,
+                        image: "https://www.sony.com/image/4bde1d0b72c1c0f9b6b5a1e5c5e5a1e5?fmt=pjpeg&wid=1200&hei=630&bgcolor=FFFFFF&bgc=FFFFFF",
+                        badge: "Premium"
+                    }
+                ],
+                cameras: [
+                    {
+                        id: 501,
+                        name: "Canon EOS R5",
+                        description: "Professional mirrorless camera",
+                        specs: "45MP, 8K video, 5-axis stabilization",
+                        price: 850000,
+                        image: "https://www.canon.co.uk/media/eos-r5-mkii-rf24-105mm-f4l-is-usm-tiled-product-image-1-1000x1000px_tcm14-2239917.jpg",
+                        badge: "Pro"
+                    },
+                    {
+                        id: 502,
+                        name: "Sony A7 IV",
+                        description: "Full-frame mirrorless camera",
+                        specs: "33MP, 4K 60p, Real-time Eye AF",
+                        price: 780000,
+                        image: "https://www.sony.com/image/4bde1d0b72c1c0f9b6b5a1e5c5e5a1e5?fmt=pjpeg&wid=1200&hei=630&bgcolor=FFFFFF&bgc=FFFFFF",
+                        badge: "Versatile"
+                    },
+                    {
+                        id: 503,
+                        name: "Nikon Z7 II",
+                        description: "High-resolution mirrorless camera",
+                        specs: "45.7MP, 4K UHD, Dual Expeed 6 processors",
+                        price: 820000,
+                        image: "https://www.nikon.com/products/mirrorless/lineup/z7/img/top/main_visual.jpg",
+                        badge: "High-Res"
+                    }
+                ],
+                accessories: [
+                    {
+                        id: 601,
+                        name: "AirPods Pro (2nd Gen)",
+                        description: "Premium wireless earbuds with ANC",
+                        specs: "Active Noise Cancellation, Spatial Audio",
+                        price: 120000,
+                        image: "https://www.apple.com/v/airpods-pro/k/images/overview/hero/hero__gnfk5g59t0qe_large.jpg",
+                        badge: "Popular"
+                    },
+                    {
+                        id: 602,
+                        name: "Logitech MX Master 3S",
+                        description: "Advanced wireless mouse for creators",
+                        specs: "8K DPI, MagSpeed scrolling, multi-device",
+                        price: 45000,
+                        image: "https://resource.logitech.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s/gallery/mx-master-3s-mouse-top-view-graphite.png?v=1",
+                        badge: "Productivity"
+                    },
+                    {
+                        id: 603,
+                        name: "Samsung T7 Shield SSD",
+                        description: "Portable SSD with rugged design",
+                        specs: "1TB, USB 3.2 Gen 2, IP65 rating",
+                        price: 65000,
+                        image: "https://images.samsung.com/is/image/samsung/p6pim/in/2105/gallery/in-t7-shield-1tb-portable-ssd-mu-pe1t0r-ww-532864568?$1300_1038_PNG$",
+                        badge: "Durable"
+                    },
+                    {
+                        id: 604,
+                        name: "Apple Magic Keyboard",
+                        description: "Wireless keyboard with Touch ID",
+                        specs: "Scissor mechanism, numeric keypad",
+                        price: 55000,
+                        image: "https://www.apple.com/v/magic-keyboard-with-touch-id-for-mac-models-with-apple-silicon/a/images/overview/hero__d3b1b5s4j1ma_large.jpg",
+                        badge: "Premium"
+                    }
+                ],
+                watches: [
+                    {
+                        id: 701,
+                        name: "Apple Watch Ultra",
+                        description: "Rugged smartwatch for adventures",
+                        specs: "49mm Titanium, GPS + Cellular, 36hr battery",
+                        price: 180000,
+                        image: "https://www.apple.com/v/apple-watch-ultra/k/images/overview/hero/hero__d1savc4n4lq6_large.jpg",
+                        badge: "Adventure"
+                    },
+                    {
+                        id: 702,
+                        name: "Samsung Galaxy Watch 5 Pro",
+                        description: "Premium Android smartwatch",
+                        specs: "45mm, Wear OS, 3-day battery",
+                        price: 120000,
+                        image: "https://images.samsung.com/is/image/samsung/p6pim/in/2208/gallery/in-galaxy-watch5-pro-r920-sm-r920nzkainu-535072349?$1300_1038_PNG$",
+                        badge: "Android"
+                    },
+                    {
+                        id: 703,
+                        name: "Garmin Fenix 7X",
+                        description: "Premium multisport GPS watch",
+                        specs: "51mm, 28-day battery, solar charging",
+                        price: 150000,
+                        image: "https://www.garmin.com/en-US/p/739416/pn/010-02541-10",
+                        badge: "Outdoor"
+                    },
+                    {
+                        id: 704,
+                        name: "Fitbit Sense 2",
+                        description: "Advanced health smartwatch",
+                        specs: "AMOLED display, ECG, stress management",
+                        price: 90000,
+                        image: "https://www.fitbit.com/global/content/dam/fitbit/global/pdp/devices/sense-2/hero-static/charcoal/sense2-charcoal-hero.png",
+                        badge: "Health"
+                    }
+                ]
+            };
+            
+            let cart = [];
+            let currentCategory = 'featured';
+            
+            // Initialize the store
+            function initStore() {
+                displayProducts('featured', 'featured-products');
+                setupEventListeners();
+                updateCartCount();
+            }
+            
+            // Display products for a category
+            function displayProducts(category, containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                products[category].forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.className = 'product-card';
+                    
+                    let badge = '';
+                    if (product.badge) {
+                        badge = `<div class="product-badge">${product.badge}</div>`;
+                    }
+                    
+                    productElement.innerHTML = `
+                        ${badge}
+                        <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-specs"><span>Specs:</span> ${product.specs}</div>
+                            <div class="product-price">Rs. ${product.price.toLocaleString()}.00</div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" data-id="${product.id}" data-category="${category}">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                                <button class="wishlist-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(productElement);
+                });
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Navigation links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const pageId = this.getAttribute('data-page');
+                        showPage(pageId);
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                });
+                
+                // Category buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const category = this.getAttribute('data-category');
+                        currentCategory = category;
+                        
+                        // Update active button
+                        document.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // Display products
+                        displayProducts(category, 'featured-products');
+                    });
+                });
+                
+                // Add to cart buttons
+                document.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('add-to-cart') || 
+                        e.target.closest('.add-to-cart')) {
+                        const button = e.target.classList.contains('add-to-cart') ? 
+                            e.target : e.target.closest('.add-to-cart');
+                        const productId = parseInt(button.getAttribute('data-id'));
+                        const category = button.getAttribute('data-category');
+                        
+                        // Find the product
+                        const product = products[category].find(p => p.id === productId);
+                        
+                        // Check if product is already in cart
+                        const existingItem = cart.find(item => item.id === productId);
+                        
+                        if (existingItem) {
+                            existingItem.quantity += 1;
+                        } else {
+                            cart.push({
+                                id: product.id,
+                                name: product.name,
+                                price: product.price,
+                                quantity: 1,
+                                image: product.image
+                            });
+                        }
+                        
+                        updateCart();
+                        showToast(`${product.name} added to cart`);
+                    }
+                });
+                
+                // Cart toggle
+                document.getElementById('cart-toggle').addEventListener('click', function() {
+                    document.getElementById('cart-sidebar').classList.add('active');
+                    document.getElementById('overlay').classList.add('active');
+                });
+                
+                // Close cart
+                document.getElementById('close-cart').addEventListener('click', function() {
+                    closeCart();
+                });
+                
+                // Overlay click
+                document.getElementById('overlay').addEventListener('click', function() {
+                    closeCart();
+                });
+                
+                // Checkout button
+                document.getElementById('checkout').addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        showToast('Your cart is empty!', 'error');
+                    } else {
+                        showReceipt();
+                    }
+                });
+                
+                // Close receipt
+                document.getElementById('close-receipt').addEventListener('click', function() {
+                    document.getElementById('receipt-modal').classList.remove('active');
+                    document.getElementById('overlay').classList.remove('active');
+                });
+                
+                // Quick links in footer
+                document.querySelectorAll('.footer-links a').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        if (this.getAttribute('data-page')) {
+                            e.preventDefault();
+                            const pageId = this.getAttribute('data-page');
+                            showPage(pageId);
+                            
+                            // Update active nav link
+                            document.querySelectorAll('.nav-link').forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('data-page') === pageId) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+            
+            // Show a page
+            function showPage(pageId) {
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                const page = document.getElementById(pageId);
+                if (page) {
+                    page.classList.add('active');
+                    
+                    // If the page has products, display them
+                    if (pageId !== 'home' && pageId !== 'contact') {
+                        const containerId = `${pageId}-products`;
+                        if (!document.getElementById(containerId).innerHTML) {
+                            displayProducts(pageId, containerId);
+                        }
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                }
+            }
+            
+            // Update cart display
+            function updateCart() {
+                const cartItemsContainer = document.getElementById('cart-items');
+                const cartCount = document.getElementById('cart-count');
+                const cartTotal = document.getElementById('cart-total');
+                
+                // Update cart count
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p style="text-align: center; margin-top: 2rem;">Your cart is empty</p>';
+                } else {
+                    cartItemsContainer.innerHTML = '';
+                    
+                    cart.forEach((item, index) => {
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.className = 'cart-item';
+                        cartItemElement.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">Rs. ${item.price.toLocaleString()}.00</div>
+                                <div class="cart-item-actions">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn decrease" data-index="${index}">-</button>
+                                        <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                        <button class="quantity-btn increase" data-index="${index}">+</button>
+                                    </div>
+                                    <button class="remove-item" data-index="${index}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        cartItemsContainer.appendChild(cartItemElement);
+                    });
+                    
+                    // Add event listeners for quantity controls
+                    document.querySelectorAll('.decrease').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            if (cart[index].quantity > 1) {
+                                cart[index].quantity -= 1;
+                                updateCart();
+                            }
+                        });
+                    });
+                    
+                    document.querySelectorAll('.increase').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            cart[index].quantity += 1;
+                            updateCart();
+                        });
+                    });
+                    
+                    document.querySelectorAll('.remove-item').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            cart.splice(index, 1);
+                            updateCart();
+                            showToast('Item removed from cart');
+                        });
+                    });
+                }
+                
+                // Update total
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotal.textContent = `Rs. ${total.toLocaleString()}.00`;
+            }
+            
+            // Close cart
+            function closeCart() {
+                document.getElementById('cart-sidebar').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
+            }
+            
+            // Show receipt
+            function showReceipt() {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const tax = total * 0.05;
+                const grandTotal = total + tax;
+                
+                // Set receipt details
+                document.getElementById('receipt-order-number').textContent = 
+                    Math.floor(100000 + Math.random() * 900000);
+                
+                const now = new Date();
+                document.getElementById('receipt-date').textContent = 
+                    now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+                
+                document.getElementById('receipt-item-count').textContent = 
+                    cart.reduce((total, item) => total + item.quantity, 0);
+                
+                // Add items to receipt
+                const receiptItemsContainer = document.getElementById('receipt-items-list');
+                receiptItemsContainer.innerHTML = '';
+                
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'receipt-item';
+                    itemElement.innerHTML = `
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>Rs. ${(item.price * item.quantity).toLocaleString()}.00</span>
+                    `;
+                    receiptItemsContainer.appendChild(itemElement);
+                });
+                
+                // Set totals
+                document.getElementById('receipt-subtotal').textContent = 
+                    `Rs. ${total.toLocaleString()}.00`;
+                document.getElementById('receipt-tax').textContent = 
+                    `Rs. ${tax.toLocaleString()}.00`;
+                document.getElementById('receipt-grand-total').textContent = 
+                    `Rs. ${grandTotal.toLocaleString()}.00`;
+                
+                // Show receipt modal
+                document.getElementById('receipt-modal').classList.add('active');
+                document.getElementById('overlay').classList.add('active');
+                
+                // Close cart
+                closeCart();
+            }
+            
+            // Show toast notification
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Update cart count
+            function updateCartCount() {
+                const count = cart.reduce((total, item) => total + item.quantity, 0);
+                document.getElementById('cart-count').textContent = count;
+            }
+            
+            // Initialize the store
+            initStore();
+        });
+    </script>
+</body>
+</html>
